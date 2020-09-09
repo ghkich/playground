@@ -1,9 +1,9 @@
 import * as React from 'react'
 
 import Pagination from '../Pagination/Pagination'
-import Table from '../Table/Table'
 import ListHeader from './ListHeader'
 import { ListContextProvider } from './ListProvider'
+import ListTable from './ListTable'
 
 export interface ListProps {
   title?: string
@@ -25,7 +25,7 @@ const List: React.FC<ListProps> = ({title, pagination = 'bottom', data, columns}
     <ListContextProvider>
       <ListHeader title={title} />
       {topPaginationNode}
-      <Table data={data} columns={columns} />
+      <ListTable data={data} columns={columns} />
       {bottomPaginationNode}
     </ListContextProvider>
   )

@@ -1,11 +1,15 @@
 import React from 'react'
 
+import { useListContext } from './ListProvider'
+
 interface ListTableProps {
   data: Record<string, string>[]
   columns: Record<string, string>
 }
 
 const ListTable: React.FC<ListTableProps> = ({data, columns}) => {
+  const {selectedRow, setSelectedRow} = useListContext()
+
   return (
     <div style={{padding: 10}}>
       <table
@@ -24,9 +28,12 @@ const ListTable: React.FC<ListTableProps> = ({data, columns}) => {
         </thead>
         <tbody>
           {data.map((row) => (
-            <tr>
+            <tr
+              onClick={() => setSelectedRow(row)}
+              style={{cursor: 'pointer', backgroundColor: selectedRow?.name === row.name ? 'yellow' : 'white'}}
+            >
               {Object.entries(row).map(([key, value]) => (
-                <td key={key} style={{border: '1px solid #999'}}>
+                <td key={key} style={{border: '1px solid #999', padding: 5}}>
                   {value}
                 </td>
               ))}
